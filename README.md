@@ -155,6 +155,8 @@ This command will:
    - Verify the logs on `slave-server` for errors.
    - Ensure the repository was cloned correctly and that Apache configuration files are valid.
 
+![output-final](https://github.com/user-attachments/assets/e329464e-3592-46e0-b20d-56f5f6f2495a)
+
 ---
 
 ## Conclusion

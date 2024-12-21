@@ -1,0 +1,38 @@
+ ---
+ - name: Install httpd and Deploy GitHub Repository
+   hosts: all
+   become: true
+
+   tasks:
+     - name: Install required packages
+       yum:
+         name:
+           - httpd
+           - git
+         state: present
+
+     - name: Clone GitHub repository
+       git:
+         repo: "https://github.com/samleti-balaji/Sign-Up-page.git"
+         dest: /var/www/html
+       notify:
+         - Restart httpd
+
+     - name: Test and enable httpd service
+       block:
+         - name: Test httpd configuration
+           command: httpd -t
+           register: httpd_config_test
+           failed_when: httpd_config_test.stderr != "Syntax OK"
+
+         - name: Start and enable httpd
+           service:
+             name: httpd
+             state: started
+             enabled: true
+
+ handlers:
+   - name: Restart httpd
+     service:
+       name: httpd
+       state: restarted

@@ -25,6 +25,9 @@ Ansible is an open-source automation tool designed for tasks such as configurati
      - `slave-server`: The target server where the playbook will be applied.
    - Ensure both instances can communicate over port 22 (SSH).
    - Note the public IP addresses of both instances for SSH access and inventory configuration.
+  
+     ![image](https://github.com/user-attachments/assets/d6fb0c7f-cb76-446a-b5aa-2a4ce6508384)
+
 
 ---
 
@@ -40,6 +43,8 @@ sudo yum update -y
 ```bash
 sudo yum install ansible -y
 ```
+![image](https://github.com/user-attachments/assets/27fcdfba-a784-427d-b0bf-264f50a380c9)
+
 
 ### Generate SSH Key for Passwordless Authentication
 1. Generate an SSH key pair on `ansible-master`:
@@ -47,10 +52,18 @@ sudo yum install ansible -y
    ssh-keygen -t rsa -b 2048 -f ~/.ssh/ansible_key
    ```
 
+![image](https://github.com/user-attachments/assets/bd4ea3cd-0600-4cda-8220-37d4241287e5)
+
 2. Copy the public key to `slave-server`:
    - Copy the content of `~/.ssh/ansible_key.pub` from `ansible-master`.
-   - Append it to the `~/.ssh/authorized_keys` file on `slave-server`.
+  
+![image](https://github.com/user-attachments/assets/22f2f14a-0410-4c41-b445-ab7ceffe2b40)
 
+   - add/paste copied key it to the `~/.ssh/authorized_keys` file on `slave-server`.
+
+![image](https://github.com/user-attachments/assets/8da4a305-b638-4959-b428-56d774d0e19b)
+ 
+   
 ---
 
 ## Step 3: Prepare the Ansible Environment
@@ -61,6 +74,8 @@ On `ansible-master`, create a directory to store Ansible files:
 mkdir ~/ansible
 cd ~/ansible
 ```
+![image](https://github.com/user-attachments/assets/8387e5a7-1576-42e2-8248-03e4d052dbf9)
+
 
 ### Configure the Inventory File
 Create an inventory file to define the target hosts:
@@ -125,6 +140,8 @@ This command will:
 - Connect to the `slave-server` as defined in the inventory.
 - Execute the tasks defined in `playbook.yml`.
 - Install Apache and Git, clone the repository, and start the Apache service.
+ ![image](https://github.com/user-attachments/assets/ca5a3462-4fbd-419a-a5f9-a35fa8783de5)
+
 
 ---
 
@@ -141,7 +158,10 @@ This command will:
 2. **Access the Application**:
    - Open a web browser.
    - Enter the public IP address of `slave-server`.
+  ![image](https://github.com/user-attachments/assets/5d2202e0-f93d-4800-91d4-8c6146408c06)
+ 
    - Verify that the index page of your GitHub repository is displayed.
+![image](https://github.com/user-attachments/assets/18ef1d64-9e97-4bca-a18e-6244b41877c9)
 
 ---
 
@@ -154,9 +174,6 @@ This command will:
 2. **Apache Not Starting**:
    - Verify the logs on `slave-server` for errors.
    - Ensure the repository was cloned correctly and that Apache configuration files are valid.
-
-![output-final](https://github.com/user-attachments/assets/e329464e-3592-46e0-b20d-56f5f6f2495a)
-
 ---
 
 ## Conclusion
